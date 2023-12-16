@@ -1,0 +1,75 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="zxx" dir="ltr">
+
+<head>
+    
+</head>
+
+<body>
+    
+        <!-- breadcrumb-area start -->
+        <div class="breadcrumb-area">
+            <div class="container">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-12 text-center">
+                        <h2 class="breadcrumb-title">Wishlist</h2>
+                        <!-- breadcrumb-list start -->
+                        <ul class="breadcrumb-list">
+                            <li class="breadcrumb-item"><a href="\">Home</a></li>
+                            <li class="breadcrumb-item active">Wishlist</li>
+                        </ul>
+                        <!-- breadcrumb-list end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- breadcrumb-area end -->
+        <!-- Wishlist Area Start -->
+        <div class="cart-main-area pt-100px pb-100px">
+            <div class="container">
+                <h3 class="cart-page-title">Your cart items</h3>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <form action="#">
+                            <div class="table-content table-responsive cart-table-content">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Product Name</th>
+                                            <th>Price</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in wishlists %}
+                                        <tr>
+                                            <td class="product-thumbnail">
+                                                <a href="{% url 'single-product' pk=i.product.pk %}"><img class="img-responsive ml-15px" src="{{i.product.m_image.url}}" alt="" /></a>
+                                            </td>
+                                            <td class="product-name"><a href="{% url 'single-product' pk=i.product.pk %}">{{i.product.name}}</a></td>
+                                            <td class="product-subtotal">₹ {{i.product.price}}</td>
+                                            <td class="product-remove">
+                                                <a href="{% url 'remove-from-wishlist' pk=i.product.pk %}"><i class="fa fa-remove"></i></a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Wishlist Area End -->
+
+</body>
+
+</html>
+
+{% endblock %}

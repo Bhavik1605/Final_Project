@@ -1,0 +1,95 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="zxx" dir="ltr">
+
+<head>
+    
+</head>
+
+<body>
+    {% if msg %}
+      <center>
+        <div class="alert alert-danger">
+          <strong>{{msg}}</strong>
+        </div>
+      </center>
+        {% elif product|length < 1 %}
+            <center>
+                <div class="alert alert-success">
+                  <strong>No Product Found</strong>
+                </div>
+              </center>
+    {% endif %}
+
+    
+        <!-- Shop Page Start  -->
+        <div class="shop-category-area pt-100px pb-100px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                        <!-- Shop Bottom Area Start -->
+                        <div class="shop-bottom-area">
+                            <!-- Tab Content Area Start -->
+                            <div class="row">
+                                <div class="col">
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="shop-grid">
+                                            <div class="row mb-n-30px">
+                                                {% for i in product %}
+                                                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-6 mb-30px">
+                                                    <!-- Single Prodect -->
+                                                    <div class="product">
+                                                        <span class="badges">
+                                                        <span class="new">{{i.condition}}</span>
+                                                        </span>
+                                                        <div class="thumb">
+                                                            <a href="{% url 'single-product' pk=i.pk %}" class="image">
+                                                                <img src="{{i.m_image.url}}" alt="Product" />
+                                                                <img class="hover-image" src="{{i.m_image.url}}" alt="Product" />
+                                                            </a>
+                                                        </div>
+                                                        <div class="content">
+                                                            <span class="category"><a href="{% url 'single-product' pk=i.pk %}">{{i.category}}</a></span>
+                                                            <h5 class="title"><a href="{% url 'single-product' pk=i.pk %}">{{i.name}}</a>
+                                                            </h5>
+                                                            <span class="price">
+                                                            <span class="new">₹ {{i.price}}</span>
+                                                            </span>
+                                                        </div>
+                                                        <div class="actions">
+                                                            {% if request.session.email %}
+                                                            <button title="Product Detail" class="action add-to-cart"><a href="{% url 'single-product' pk=i.pk %}"><i class="pe-7s-info" style="color:white;"></i></a></button> 
+                     
+                                                            <!-- <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i class="pe-7s-like"></i></button>  -->
+
+                                                            <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal-{{forloop.counter}}"><i class="pe-7s-look"></i></button>
+                                                            {% else %}
+                                                            <a href="{% url 'login' %}"><button title="Login" class="action"><i class="pe-7s-user"></i></button></a>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Tab Content Area End -->
+                        </div>
+                        <!-- Shop Bottom Area End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Shop Page End  -->
+
+</body>
+
+</html>
+
+{% endblock %}

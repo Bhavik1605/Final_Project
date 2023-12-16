@@ -1,0 +1,59 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="zxx" dir="ltr">
+
+<head>
+    
+</head>
+
+<body>
+        <!-- login area start -->
+        <div class="login-register-area pt-100px pb-100px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 col-md-12 ml-auto mr-auto">
+                        <div class="login-register-wrapper">
+                            <div class="login-register-tab-list nav">
+                                    <h4>Profile</h4>
+                            </div>
+                            <div class="tab-content">
+                                <div id="lg1" class="tab-pane active">
+                                    <div class="login-form-container">
+                                        <div class="login-register-form">
+                                            {% if msg %}
+                                              <center>
+                                                <div class="alert alert-success">
+                                                  <strong>{{msg}}</strong>
+                                                </div>
+                                              </center>
+                                            {% endif %}
+                                            <form action="{% url 'profile' %}" method="post">
+                                                {% csrf_token %}
+                                                <input type="text" name="username" placeholder="Username" value="{{user.username}}" />
+                                                <input type="email" name="email" placeholder="Email" disabled value="{{user.email}}" />
+                                                <input type="tel" name="mobile" placeholder="Mobile Number" value="{{user.mobile}}" />
+                                                <div class="button-box">
+                                                    <center>
+                                                        <button type="submit"><span>Update Profile</span></button>
+                                                    </center>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- login area end -->
+
+</body>
+
+</html>
+
+{% endblock %}
